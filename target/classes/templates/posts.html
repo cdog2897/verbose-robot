@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Missionary Awareness</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Missionary Awareness</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/create}">Create</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1 class="mt-5 mb-4">Posts</h1>
+    <div class="row">
+        <div th:each="post : ${posts}" class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <img th:src="${post.image_url}" class="card-img-top" alt="Card Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${post.title}">Title</h5>
+                    <p class="card-text" th:text="${post.description}">Description</p>
+                    <p class="card-text"><strong>Start Date:</strong> <span th:text="${post.start_date}">Start Date</span></p>
+                    <p class="card-text"><strong>End Date:</strong> <span th:text="${post.end_date}">End Date</span></p>
+                    <p class="card-text"><strong>Email:</strong> <span th:text="${post.email}">Email</span></p>
+                    <div th:if="${post.email eq emailAddress}" class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a th:href="@{/edit/{id}(id=${post.id})}" class="btn btn-sm btn-primary">Edit</a>
+                            <a th:href="@{/delete/{id}(id=${post.id})}" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
